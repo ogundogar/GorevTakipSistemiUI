@@ -1,0 +1,40 @@
+.mat-mdc-row .mat-mdc-cell {
+  cursor: pointer;
+}
+#butonlar button {
+  margin: 10px 0px 1px 10px;
+}
+table .mat-mdc-row:hover .mat-mdc-cell {
+  background-color: rgba(0, 0, 0, 0.753);
+  border-color: currentColor;
+}
+table{
+  table-layout: fixed;
+  width: 100%;
+
+}
+table th{
+    position: sticky;
+    top: 0;      
+    z-index: 2; 
+    font-weight: bold;
+    font-size: 18px;
+}
+.tik-kolonu{
+  width: 5%;
+}
+.baslik-kolonu{
+  width: 15%;
+}
+.baslangicTarihi-kolonu{
+  width: 10%;
+}
+.bitisTarihi-kolonu{
+  width: 10%;
+}
+.konu-kolonu{
+  width: 50%;
+}
+.durum-kolonu{
+  width: 10%;
+}

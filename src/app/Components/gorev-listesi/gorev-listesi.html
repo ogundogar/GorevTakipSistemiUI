@@ -1,0 +1,61 @@
+<div>
+<h1 style="display: flex; justify-content: center; align-items: center;">Görev Listesi</h1>
+<button type="button" class="btn btn-primary" style="position: absolute; top: 10px; right: 10px;">Çıkış Yap <fa-icon [icon]="faRightFromBracket"></fa-icon></button>
+</div>
+
+<div style="display: flex; justify-content: start; align-items: center;" id="butonlar">
+    <button type="button" class="btn btn-primary" (click)="EkleEkraniAc()">Ekle</button>
+    <button type="button" class="btn btn-danger">Sil</button>
+</div>
+
+<div style="max-height: 36rem; overflow-y: auto;">
+  
+<table mat-table [dataSource]="dataSource">
+  <!-- Tik -->
+  <ng-container matColumnDef="tik">
+    <th class="tik-kolonu" mat-header-cell *matHeaderCellDef></th>
+    <td class="tik-kolonu" mat-cell *matCellDef="let element"><mat-checkbox class="example-margin" 
+    (click)="$event.stopPropagation()"
+    (change)="checkboxDegisti(element, $event)"
+    ></mat-checkbox></td>
+  </ng-container>
+
+  <!-- Başlık -->
+  <ng-container matColumnDef="baslik">
+    <th class="baslik-kolonu" mat-header-cell *matHeaderCellDef>Başlık</th>
+    <td class="baslik-kolonu" mat-cell *matCellDef="let element">{{element.baslik}}</td>
+  </ng-container>
+
+  <!-- Başlangıç Tarihi -->
+  <ng-container matColumnDef="baslangicTarihi">
+    <th class="baslangicTarihi-kolonu" mat-header-cell *matHeaderCellDef>baslangicTarihi</th>
+    <td class="baslangicTarihi-kolonu" mat-cell *matCellDef="let element">{{element.baslangicTarihi | date:'dd.MM.yyyy'}}</td>
+  </ng-container>
+
+  <!-- Bitiş Tarihi -->
+  <ng-container matColumnDef="bitisTarihi">
+    <th class="bitisTarihi-kolonu" mat-header-cell *matHeaderCellDef>bitisTarihi</th>
+    <td class="bitisTarihi-kolonu" mat-cell *matCellDef="let element">{{element.bitisTarihi| date:'dd.MM.yyyy'}}</td>
+  </ng-container>
+
+  <!-- Konu -->
+  <ng-container matColumnDef="konu">
+    <th class="konu-kolonu" mat-header-cell *matHeaderCellDef>konu</th>
+    <td class="konu-kolonu" mat-cell *matCellDef="let element">{{element.konu}}</td>
+  </ng-container>
+
+  <!-- Durum -->
+  <ng-container matColumnDef="durum">
+    <th class="durum-kolonu" mat-header-cell *matHeaderCellDef>durum</th>
+    <td class="durum-kolonu" mat-cell *matCellDef="let element">{{element.durum | pipeDurum}}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr
+      mat-row
+      (click)="guncelleEkraniAc(row)"
+      *matRowDef="let row; columns: displayedColumns;"
+  ></tr>
+</table>
+</div>
+

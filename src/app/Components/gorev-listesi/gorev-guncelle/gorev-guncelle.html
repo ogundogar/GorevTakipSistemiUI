@@ -1,0 +1,43 @@
+<form [formGroup]="frm" (ngSubmit)="gorevGuncelle()">
+    <div class="p-5">
+        <!-- input alanı -->
+            <mat-form-field>
+            <mat-label>Başlık</mat-label>
+            <input matInput formControlName="baslik">
+            </mat-form-field>
+
+        <!-- Başlangıç Tarihi -->
+            <mat-form-field>
+            <mat-label>Başlangıç Tarihi</mat-label>
+            <input matInput [matDatepicker]="picker1" formControlName="basTarih">
+            <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+
+        <!-- Bitiş Tarihi -->
+            <mat-form-field>
+            <mat-label>Bitiş Tarihi</mat-label>
+            <input matInput [matDatepicker]="picker2" formControlName="bitTarih">
+            <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+
+        <!-- Konu -->
+            <mat-form-field>
+            <mat-label>Konu</mat-label>
+            <textarea matInput formControlName="konu"></textarea>
+            </mat-form-field>  
+
+        <!-- Durum -->
+        <mat-form-field>
+            <mat-label>Durum Seçiniz</mat-label>
+                <mat-select formControlName="durum">
+                    <mat-option value="1">Tamamlandı</mat-option>
+                    <mat-option value="2">Devam Ediyor</mat-option>
+                    <mat-option value="3">İptal Edildi</mat-option>
+                    <mat-option value="4">Beklemede</mat-option>
+                </mat-select>
+        </mat-form-field>
+        <button matButton="tonal">Güncelle</button>
+    </div>
+</form>

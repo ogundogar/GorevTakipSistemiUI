@@ -1,0 +1,43 @@
+<div id="kayit" >
+   <div id="kayitFormEkrani" class="container">
+        <div id="baslik" class="col-12" style="display: flex;justify-content: center;align-items: center;">
+            <h1> Kayıt Ol</h1>
+        </div>
+        <div class="col-12" style="display: flex;justify-content: center;align-items: center;">
+            <form>
+                <div class="formKayit">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Kullanıcı Adı</mat-label>
+                        <input matInput [formControl]="kullaniciAdiFormControl" [errorStateMatcher]="matcher">
+                        @if (kullaniciAdiFormControl.hasError('required')) {
+                        <mat-error>Kullanıcı Adı girmek zorunludur!</mat-error>
+                        }
+                    </mat-form-field>
+                </div>
+                <div class="formKayit">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>E-Posta</mat-label>
+                        <input type="email" matInput [formControl]="epostaFormControl">
+
+                    </mat-form-field>
+                </div>
+                <div class="formKayit" >
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Şifre</mat-label>
+                        <input type="password" matInput [formControl]="sifreFormControl">
+                    </mat-form-field>
+                </div>
+                <div class="formKayit" >
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Şifre Doğrulama</mat-label>
+                        <input type="password" matInput [formControl]="sifreDogrulamaFormControl">
+                    </mat-form-field>
+                </div>
+                <p>Giriş Yapmak İçin <strong style="color: blue; cursor: pointer; text-decoration: underline;" (click)="kayitEkraninaGit()">Tıklayınız</strong>!</p>
+                <div class="formKayit">
+                    <button matButton="tonal" >Kayıt Ol</button>
+                </div>
+            </form>
+        </div>
+   </div>
+</div>
