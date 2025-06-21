@@ -4,35 +4,40 @@
             <h1> Kayıt Ol</h1>
         </div>
         <div class="col-12" style="display: flex;justify-content: center;align-items: center;">
-            <form>
+            <form [formGroup]="frm" (ngSubmit)="kullaniciOlustur()">
+                <!-- Kullanıcı Adı -->
                 <div class="formKayit">
                     <mat-form-field class="example-full-width">
                         <mat-label>Kullanıcı Adı</mat-label>
-                        <input matInput [formControl]="kullaniciAdiFormControl" [errorStateMatcher]="matcher">
+                        <input matInput formControlName="adi" [errorStateMatcher]="matcher">
                         @if (kullaniciAdiFormControl.hasError('required')) {
                         <mat-error>Kullanıcı Adı girmek zorunludur!</mat-error>
                         }
                     </mat-form-field>
                 </div>
+                <!-- E-Posta -->
                 <div class="formKayit">
                     <mat-form-field class="example-full-width">
                         <mat-label>E-Posta</mat-label>
-                        <input type="email" matInput [formControl]="epostaFormControl">
+                        <input type="email" matInput formControlName="email">
 
                     </mat-form-field>
                 </div>
+                <!-- Şifre -->
                 <div class="formKayit" >
                     <mat-form-field class="example-full-width">
                         <mat-label>Şifre</mat-label>
-                        <input type="password" matInput [formControl]="sifreFormControl">
+                        <input type="password" matInput formControlName="sifre">
                     </mat-form-field>
                 </div>
+                <!-- şifre tekrar -->
                 <div class="formKayit" >
                     <mat-form-field class="example-full-width">
                         <mat-label>Şifre Doğrulama</mat-label>
-                        <input type="password" matInput [formControl]="sifreDogrulamaFormControl">
+                        <input type="password" matInput formControlName="sifreTekrar">
                     </mat-form-field>
                 </div>
+                <!-- giriş yap -->
                 <p>Giriş Yapmak İçin <strong style="color: blue; cursor: pointer; text-decoration: underline;" (click)="kayitEkraninaGit()">Tıklayınız</strong>!</p>
                 <div class="formKayit">
                     <button matButton="tonal" >Kayıt Ol</button>

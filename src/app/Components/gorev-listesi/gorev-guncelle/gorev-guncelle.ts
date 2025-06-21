@@ -7,6 +7,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MAT_DATE_LOCALE, provideNativeDateAdapter} from '@angular/material/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { DTOGorev } from '../../../DTOs/DTOGorev';
+import { GorevHttpClientService } from '../../../services/customHttoClient/gorev-http-client-service';
 
 @Component({
   selector: 'app-gorev-guncelle',
@@ -20,8 +22,7 @@ export class GorevGuncelle {
   data = inject(MAT_DIALOG_DATA);
   frm:FormGroup;
 
-  constructor(private formBuilder:FormBuilder){
-    console.log(this.data)
+  constructor(private formBuilder:FormBuilder,private gorevHttpClient:GorevHttpClientService){
     this.frm=formBuilder.group({
       baslik:[this.data.baslik],
       basTarih:[this.data.baslangicTarihi],
@@ -32,7 +33,17 @@ export class GorevGuncelle {
   }
 
   gorevGuncelle(){
-    console.log(this.frm.value);
-  }
+      console.log(this.frm.value);
+      const gorev:DTOGorev={
+        id:this.data.id,
+        baslik: this.frm.value.baslik,
+        baslangicTarihi: this.frm.value.basTarih,
+        bitisTarihi: this.frm.value.bitTarih,
+        konu: this.frm.value.konu,
+        durum: Number(this.frm.value.durum),
+        kullaniciId: 4,
+      }
+      this.gorevHttpClient.put(gorev);
+   }
 
  }
