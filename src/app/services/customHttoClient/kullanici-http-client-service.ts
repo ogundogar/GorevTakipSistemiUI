@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClientService } from '../http-client-service';
 import { DTOKullanici } from '../../DTOs/DTOKullanici';
-import { lastValueFrom } from 'rxjs';
+import { firstValueFrom, lastValueFrom, Observable } from 'rxjs';
 import { DTOGiris } from '../../DTOs/DTOGiris';
+import { DTOToken } from '../../DTOs/DTOToken';
 
 @Injectable({
   providedIn: 'root'
@@ -18,11 +19,21 @@ export class KullaniciHttpClientService {
     return await PromiseData;
     }
 
-  async giris():Promise<{kullanicilar:DTOGiris[]}>{
-    const PromiseData:Promise<{kullanicilar:DTOGiris[]}>=lastValueFrom(
-    this.httpClientService.get<{kullanicilar:DTOGiris[]}>({controller:"Kullanici",action:"Giris"}));
-    return await PromiseData;
+  async giris(kullanici: DTOGiris, successCallBack?: () => void): Promise<any> {
+    const observable: Observable<any | DTOToken> = this.httpClientService.post<any | DTOToken>({
+      controller: "Kullanici",
+      action: "Giris"
+    }, kullanici)
+
+    const token: DTOToken = await firstValueFrom(observable) as DTOToken;
+    if (token) {
+      localStorage.setItem("accessToken", token.accessToken);
+      localStorage.setItem("refreshToken", token.refreshToken);
     }
+
+    successCallBack();
+  }
+
 
   create(kullanici: DTOKullanici, successCallBack?: () => void){
   this.httpClientService.post({

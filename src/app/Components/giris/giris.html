@@ -4,26 +4,17 @@
             <h1> Giriş</h1>
         </div>
         <div class="col-12" style="display: flex;justify-content: center;align-items: center;">
-            <form>
+            <form [formGroup]="frm" (ngSubmit)="girisYap()">
                 <div class="formGiris">
                     <mat-form-field class="example-full-width">
                         <mat-label>E-Posta</mat-label>
-                        <input type="email" matInput [formControl]="epostaFormControl" [errorStateMatcher]="matcher">
-                        @if (epostaFormControl.hasError('email') && !epostaFormControl.hasError('required')) {
-                        <mat-error>Hatalı E-Posta Girdiniz!!</mat-error>
-                        }
-                        @if (epostaFormControl.hasError('required')) {
-                        <mat-error>E-Posta girmek zorunludur!</mat-error>
-                        }
+                        <input type="email" matInput formControlName="email">
                     </mat-form-field>
                 </div>
                 <div class="formGiris" >
                     <mat-form-field class="example-full-width">
                         <mat-label>Şifre</mat-label>
-                        <input type="password" matInput [formControl]="sifreFormControl" [errorStateMatcher]="matcher">
-                        @if (sifreFormControl.hasError('required')) {
-                        <mat-error>Şifre girmek zorunludur!</mat-error>
-                        }
+                        <input type="password" matInput formControlName="sifre" >
                     </mat-form-field>
                 </div>
                 <p>Kayıt Olmak İçin <strong style="color: blue; cursor: pointer; text-decoration: underline;" (click)="kayitEkraninaGit()">Tıklayınız</strong>!</p>

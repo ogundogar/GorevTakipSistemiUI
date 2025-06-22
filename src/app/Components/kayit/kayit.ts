@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MyErrorStateMatcher } from '../giris/giris';
+
 import { Router } from '@angular/router';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
@@ -22,7 +22,7 @@ export class Kayit {
   sifreFormControl = new FormControl('', [Validators.required]);
   sifreDogrulamaFormControl= new FormControl('', [Validators.required]);
   kullaniciAdiFormControl = new FormControl('', [Validators.required]);
-  matcher = new MyErrorStateMatcher();
+
   frm:FormGroup;
   constructor(private router: Router,private formBuilder:FormBuilder,private kullaniciHttpClient:KullaniciHttpClientService) {
     this.frm=formBuilder.group({
@@ -44,8 +44,6 @@ export class Kayit {
         sifre: this.frm.value.sifre,
         sifreTekrar:this.frm.value.sifreTekrar
       }
-      debugger
-      console.log(this.frm.value);
       this.kullaniciHttpClient.create(kullanici);
    }
 

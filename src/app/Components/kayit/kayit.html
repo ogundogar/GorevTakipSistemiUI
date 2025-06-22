@@ -9,10 +9,8 @@
                 <div class="formKayit">
                     <mat-form-field class="example-full-width">
                         <mat-label>Kullanıcı Adı</mat-label>
-                        <input matInput formControlName="adi" [errorStateMatcher]="matcher">
-                        @if (kullaniciAdiFormControl.hasError('required')) {
-                        <mat-error>Kullanıcı Adı girmek zorunludur!</mat-error>
-                        }
+                        <input matInput formControlName="adi">
+
                     </mat-form-field>
                 </div>
                 <!-- E-Posta -->

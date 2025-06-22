@@ -1,4 +1,4 @@
 export class DTOGiris{
 	email:string;
-	password:string;
+	sifre:string;
 }

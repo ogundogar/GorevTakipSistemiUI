@@ -12,6 +12,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { GorevHttpClientService } from '../../services/customHttoClient/gorev-http-client-service';
 import { DTOGorev } from '../../DTOs/DTOGorev';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -30,6 +31,9 @@ faRightFromBracket = faRightFromBracket;
   clickedRows = new Set<DTOGorev>();
   gorevHttpCLient:GorevHttpClientService=inject(GorevHttpClientService)
   dialog = inject(MatDialog);
+  constructor(private router: Router){
+
+  }
   
   ngOnInit() {
       this.get();
@@ -49,6 +53,11 @@ faRightFromBracket = faRightFromBracket;
     this.gorevHttpCLient.removeRange(this.silinecekDegerler);
   }
 
+  cikisYap(){
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+    this.router.navigate(['/giris']);
+  }
 
 checkboxDegisti(element: any, event: any): void {
   if (event.checked) {

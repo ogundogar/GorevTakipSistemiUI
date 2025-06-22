@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { Giris } from './Components/giris/giris';
 import { Kayit } from './Components/kayit/kayit';
 import { GorevListesi } from './Components/gorev-listesi/gorev-listesi';
+import { AuthService } from './services/auth-service';
 
 
 @Component({
@@ -12,5 +13,7 @@ import { GorevListesi } from './Components/gorev-listesi/gorev-listesi';
   styleUrl: './app.css'
 })
 export class App {
-  protected title = 'GorevTakipSistemiUI';
+  constructor(private authService:AuthService){
+    this.authService.identityCheck();
+  }
 }
