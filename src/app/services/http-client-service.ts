@@ -17,12 +17,18 @@ export class HttpClientService {
 
 	get<T>(requestParameter: Partial<RequestParameters>, id?: number): Observable<T> {
 		let url: string = "";
-    if (requestParameter.fullEndPoint)
-      url = requestParameter.fullEndPoint;
-    else
-      url = `${this.url(requestParameter)}${id ? `/${id}`: ""}${requestParameter.queryString?`?${requestParameter.queryString}`:""}`;
-    return this.httpClient.get<T>(url, { headers: requestParameter.headers });
+
+		if (requestParameter.fullEndPoint)
+			url = requestParameter.fullEndPoint;
+		else
+			url = `${this.url(requestParameter)}${id ? `/${id}` : ""}${requestParameter.queryString ? `?${requestParameter.queryString}` : ""}`;
+
+		return this.httpClient.get<T>(url, {
+			headers: requestParameter.headers ?? new HttpHeaders(),
+			withCredentials: true
+		});
 	}
+
 
 	post<T>(requestParameter: Partial<RequestParameters>, body: Partial<T>): Observable<T> {
 		let url: string = "";
@@ -31,7 +37,9 @@ export class HttpClientService {
 		else
 		  url = `${this.url(requestParameter)}${requestParameter.queryString?`?${requestParameter.queryString}`:""}`
 	
-		return this.httpClient.post<T>(url, body, { headers: requestParameter.headers });
+		return this.httpClient.post<T>(url, body, { 
+			headers: requestParameter.headers,
+			withCredentials: true });
 	  }
 	
 	 put<T>(requestParameter: Partial<RequestParameters>, body: Partial<T>): Observable<T> {
@@ -41,7 +49,8 @@ export class HttpClientService {
 		else
 		  url = `${this.url(requestParameter)}${requestParameter.queryString?`?${requestParameter.queryString}`:""}`;
 	
-		return this.httpClient.put<T>(url, body, { headers: requestParameter.headers});
+		return this.httpClient.put<T>(url, body, { headers: requestParameter.headers,
+			withCredentials: true});
 	 }
 	
 	remove<T>(requestParameter: Partial<RequestParameters>, id: number): Observable<T> {
@@ -50,7 +59,8 @@ export class HttpClientService {
 			url = requestParameter.fullEndPoint;
 		else
 			url = `${this.url(requestParameter)}/${id}${requestParameter.queryString?`?${requestParameter.queryString}`:""}`;
-		return this.httpClient.delete<T>(url, { headers: requestParameter.headers});
+		return this.httpClient.delete<T>(url, { headers: requestParameter.headers,
+			withCredentials: true});
 	  }
 
 	removeRange<T>(requestParameter: Partial<RequestParameters>, idList: number[]): Observable<T> {
@@ -70,4 +80,5 @@ export class RequestParameters{
 	headers?: HttpHeaders;
 	baseUrl?: string;
 	fullEndPoint?: string;
+	withCredentials?: boolean;
 }

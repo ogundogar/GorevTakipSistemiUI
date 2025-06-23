@@ -32,13 +32,13 @@ export class GorevEkle {
  }
  gorevEkle(){
     console.log(this.frm.value);
+    debugger
     const gorev:DTOGorev={
       baslik: this.frm.value.baslik,
-      baslangicTarihi: this.frm.value.basTarih,
-      bitisTarihi: this.frm.value.bitTarih,
+      basTarih: this.frm.value.basTarih,
+      bitTarih: this.frm.value.bitTarih,
       konu: this.frm.value.konu,
       durum: Number(this.frm.value.durum),
-      kullaniciId: 4,
     }
     this.gorevHttpClient.create(gorev);
  }

@@ -11,24 +11,28 @@ export class GorevHttpClientService {
 
   constructor(private httpClientService:HttpClientService){}
 
-  async get():Promise<{gorevler:DTOGorev[]}>{
-  
-		const PromiseData:Promise<{gorevler:DTOGorev[]}>=lastValueFrom(
-		this.httpClientService.get<{gorevler:DTOGorev[]}>({
-		controller:"Gorev"}));
-		return await PromiseData;
-	  }
+  async get(): Promise<{ gorevler: DTOGorev[] }> {
+		const promiseData: Promise<{ gorevler: DTOGorev[] }> = lastValueFrom(
+			this.httpClientService.get<{ gorevler: DTOGorev[] }>({
+			controller: "Gorev",
+			withCredentials: true 
+			})
+		);
 
-	async getWhere(baslik?:string,baslangicTarihi?:Date,bitisTarihi?:Date,durum?:enumDurum):Promise<{gorevler:DTOGorev[]}>{
+		return await promiseData;
+		}
+
+
+	async getWhere(baslik?:string,basTarih?:Date,bitTarih?:Date,durum?:enumDurum):Promise<{gorevler:DTOGorev[]}>{
 		let queryString = "";
 		if (baslik) {
 			queryString += `baslik=${baslik}`;
 		}
-		if (String(baslangicTarihi) != 'Invalid Date') {
-			queryString += `${queryString.length > 0 ? "&" : ""}baslangicTarihi=${baslangicTarihi}`;
+		if (String(basTarih) != 'Invalid Date') {
+			queryString += `${queryString.length > 0 ? "&" : ""}basTarih=${basTarih}`;
 		}
-		if (String(bitisTarihi) != 'Invalid Date') {
-			queryString += `${queryString.length > 0 ? "&" : ""}bitisTarihi=${bitisTarihi}`;
+		if (String(bitTarih) != 'Invalid Date') {
+			queryString += `${queryString.length > 0 ? "&" : ""}bitTarih=${bitTarih}`;
 		}
 		if (durum!=null) {
 			queryString += `${queryString.length > 0 ? "&" : ""}durum=${durum}`;

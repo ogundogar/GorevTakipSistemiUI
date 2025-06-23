@@ -9,7 +9,7 @@
         <!-- Başlangıç Tarihi -->
             <mat-form-field>
             <mat-label>Başlangıç Tarihi</mat-label>
-            <input matInput [matDatepicker]="picker1" formControlName="basTarih">
+            <input matInput [matDatepicker]="picker1" formControlName="basTarih" type="date">
             <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
             <mat-datepicker #picker1></mat-datepicker>
             </mat-form-field>
@@ -17,7 +17,7 @@
         <!-- Bitiş Tarihi -->
             <mat-form-field>
             <mat-label>Bitiş Tarihi</mat-label>
-            <input matInput [matDatepicker]="picker2" formControlName="bitTarih">
+            <input matInput [matDatepicker]="picker2" formControlName="bitTarih" type="date">
             <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
             <mat-datepicker #picker2></mat-datepicker>
             </mat-form-field>
