@@ -13,7 +13,7 @@ import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { GorevHttpClientService } from '../../services/customHttoClient/gorev-http-client-service';
 import { DTOGorev } from '../../DTOs/DTOGorev';
 import { Router } from '@angular/router';
-
+declare var alertify:any;
 
 @Component({
   selector: 'app-gorev-listesi',
@@ -25,7 +25,7 @@ import { Router } from '@angular/router';
 export class GorevListesi {
 private datas=[];
 faRightFromBracket = faRightFromBracket;
-  displayedColumns: string[] = ['tik','baslik', 'baslangicTarihi', 'bitisTarihi', 'konu', 'durum'];
+  displayedColumns: string[] = ['tik','baslik', 'basTarih', 'bitTarih', 'konu', 'durum'];
   silinecekDegerler: any[] = [];
   dataSource = null;
   clickedRows = new Set<DTOGorev>();
@@ -40,36 +40,55 @@ faRightFromBracket = faRightFromBracket;
     }
 
   EkleEkraniAc() {
-    this.dialog.open(GorevEkle);
+   const dialogRef = this.dialog.open(GorevEkle);
+
+   dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        this.get();
+      });
   }
 
   guncelleEkraniAc(guncellenecekGorev) {
-    this.dialog.open(GorevGuncelle,{
+    const dialogRef =  this.dialog.open(GorevGuncelle,{
     data: guncellenecekGorev
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        this.get();
+      });
   }
 
   gorevSil() {
-    this.gorevHttpCLient.removeRange(this.silinecekDegerler);
+     alertify.confirm('Silme', 'Görevleri Silmek İstediğinize Emin Misiniz?', 
+      ()=>{ 
+        this.gorevHttpCLient.removeRange(this.silinecekDegerler);
+        this.get();
+       },()=>{ });
   }
 
   cikisYap(){
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
-    this.router.navigate(['/giris']);
+    alertify.confirm('Çıkış', 'Çıkış Yapmak İstediğinize Emin Misiniz?', 
+      ()=>{ 
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        this.router.navigate(['/giris']);
+       },()=>{ });
   }
 
-checkboxDegisti(element: any, event: any): void {
-  if (event.checked) {
-    this.silinecekDegerler.push(element.id);
-  } else {
-    this.silinecekDegerler = this.silinecekDegerler.filter(item => item !== element.id);
+  async get(){
+      const gorevler:{gorevler:DTOGorev[];} = await this.gorevHttpCLient.get();
+      this.dataSource=gorevler;
+    }
+
+  checkboxDegisti(element: any, event: any): void {
+    if (event.checked) {
+      this.silinecekDegerler.push(element.id);
+    } else {
+      this.silinecekDegerler = this.silinecekDegerler.filter(item => item !== element.id);
+    }
+    console.log(this.silinecekDegerler);
   }
-  console.log(this.silinecekDegerler);
-}
-async get(){
-		const gorevler:{gorevler:DTOGorev[];} = await this.gorevHttpCLient.get();
-		this.dataSource=gorevler;
-	}
+
 
 }

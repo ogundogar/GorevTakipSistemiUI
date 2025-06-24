@@ -44,7 +44,7 @@ export class Kayit {
         sifre: this.frm.value.sifre,
         sifreTekrar:this.frm.value.sifreTekrar
       }
-      this.kullaniciHttpClient.create(kullanici);
+      this.kullaniciHttpClient.post(kullanici);
    }
 
 

@@ -46,21 +46,59 @@ export class GorevHttpClientService {
 		return await PromiseData;
 	  }
 
-	create(gorev: DTOGorev, successCallBack?: () => void){
+	async post(gorev: DTOGorev, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void){
 	this.httpClientService.post({
 		controller:"Gorev",
-	},gorev).subscribe(result=>{ successCallBack()});}
+	},gorev)
+	.subscribe({
+		next: result => {
+			if (successCallBack) successCallBack();
+		},
+		error: err => {
+			console.error('Hata oluştu:', err);
+			if (errorCallBack) errorCallBack(err);
+		}
+		});
+	}
 
-	put(gorev: DTOGorev, successCallBack?: () => void){
+	async put(gorev: DTOGorev, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void){
 	this.httpClientService.put({
 		controller:"Gorev",
-	},gorev).subscribe(result=>{ successCallBack()});}
+	},gorev)
+	.subscribe({
+		next: result => {
+			if (successCallBack) successCallBack();
+		},
+		error: err => {
+			console.error('Hata oluştu:', err);
+			if (errorCallBack) errorCallBack(err);
+		}
+		});
+}
 
-	remove(id: number, successCallBack?: () => void) {
+	remove(id: number, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
 	this.httpClientService.remove<any>({controller: "Gorev" }, id)
-		.subscribe(result=>{ successCallBack()});}
+		.subscribe({
+		next: result => {
+			if (successCallBack) successCallBack();
+		},
+		error: err => {
+			console.error('Hata oluştu:', err);
+			if (errorCallBack) errorCallBack(err);
+		}
+		});
+	}
 
-	removeRange(idList: number[], successCallBack?: () => void) {
+	removeRange(idList: number[], successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
 	this.httpClientService.removeRange<any>({controller: "Gorev",action:"RemoveRange" }, idList)
-		.subscribe(result=>{ successCallBack()});}
+		.subscribe({
+		next: result => {
+			if (successCallBack) successCallBack();
+		},
+		error: err => {
+			console.error('Hata oluştu:', err);
+			if (errorCallBack) errorCallBack(err);
+		}
+		});
+	}
 }

@@ -7,19 +7,19 @@
             </mat-form-field>
 
         <!-- Başlangıç Tarihi -->
-            <mat-form-field>
+              <mat-form-field>
             <mat-label>Başlangıç Tarihi</mat-label>
-            <input matInput [matDatepicker]="picker1" formControlName="basTarih" type="date">
-            <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
-            <mat-datepicker #picker1></mat-datepicker>
+            <input matInput [matDatepicker]="basTarih" formControlName="basTarih">
+            <mat-datepicker-toggle matIconSuffix [for]="basTarih"></mat-datepicker-toggle>
+            <mat-datepicker #basTarih></mat-datepicker>
             </mat-form-field>
 
         <!-- Bitiş Tarihi -->
             <mat-form-field>
             <mat-label>Bitiş Tarihi</mat-label>
-            <input matInput [matDatepicker]="picker2" formControlName="bitTarih" type="date">
-            <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
-            <mat-datepicker #picker2></mat-datepicker>
+            <input matInput [matDatepicker]="bitTarih" formControlName="bitTarih">
+            <mat-datepicker-toggle matIconSuffix [for]="bitTarih"></mat-datepicker-toggle>
+            <mat-datepicker #bitTarih></mat-datepicker>
             </mat-form-field>
 
         <!-- Konu -->
@@ -38,6 +38,9 @@
                     <mat-option value="4">Beklemede</mat-option>
                 </mat-select>
         </mat-form-field>
+        
         <button matButton="tonal" >Kaydet</button>
+        <button matButton (click)="onNoClick()" type="button">Kapat</button>
+
     </div>
 </form>

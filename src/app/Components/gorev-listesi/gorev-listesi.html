@@ -10,7 +10,7 @@
 
 <div style="max-height: 36rem; overflow-y: auto;">
   
-<table mat-table [dataSource]="dataSource">
+<table mat-table [dataSource]="dataSource" id="gorevTablosu">
   <!-- Tik -->
   <ng-container matColumnDef="tik">
     <th class="tik-kolonu" mat-header-cell *matHeaderCellDef></th>
@@ -27,26 +27,26 @@
   </ng-container>
 
   <!-- Başlangıç Tarihi -->
-  <ng-container matColumnDef="baslangicTarihi">
-    <th class="baslangicTarihi-kolonu" mat-header-cell *matHeaderCellDef>baslangicTarihi</th>
-    <td class="baslangicTarihi-kolonu" mat-cell *matCellDef="let element">{{element.baslangicTarihi | date:'dd.MM.yyyy'}}</td>
+  <ng-container matColumnDef="basTarih">
+    <th class="basTarih-kolonu" mat-header-cell *matHeaderCellDef>Başlangıç Tarihi</th>
+    <td class="basTarih-kolonu" mat-cell *matCellDef="let element">{{element.basTarih | date:'dd.MM.yyyy'}}</td>
   </ng-container>
 
   <!-- Bitiş Tarihi -->
-  <ng-container matColumnDef="bitisTarihi">
-    <th class="bitisTarihi-kolonu" mat-header-cell *matHeaderCellDef>bitisTarihi</th>
-    <td class="bitisTarihi-kolonu" mat-cell *matCellDef="let element">{{element.bitisTarihi| date:'dd.MM.yyyy'}}</td>
+  <ng-container matColumnDef="bitTarih">
+    <th class="bitTarih-kolonu" mat-header-cell *matHeaderCellDef>Bitiş Tarihi</th>
+    <td class="bitTarih-kolonu" mat-cell *matCellDef="let element">{{element.bitTarih| date:'dd.MM.yyyy'}}</td>
   </ng-container>
 
   <!-- Konu -->
   <ng-container matColumnDef="konu">
-    <th class="konu-kolonu" mat-header-cell *matHeaderCellDef>konu</th>
+    <th class="konu-kolonu" mat-header-cell *matHeaderCellDef>Konu</th>
     <td class="konu-kolonu" mat-cell *matCellDef="let element">{{element.konu}}</td>
   </ng-container>
 
   <!-- Durum -->
   <ng-container matColumnDef="durum">
-    <th class="durum-kolonu" mat-header-cell *matHeaderCellDef>durum</th>
+    <th class="durum-kolonu" mat-header-cell *matHeaderCellDef>Durum</th>
     <td class="durum-kolonu" mat-cell *matCellDef="let element">{{element.durum | pipeDurum}}</td>
   </ng-container>
 

@@ -35,7 +35,7 @@ export class KullaniciHttpClientService {
   }
 
 
-  create(kullanici: DTOKullanici, successCallBack?: () => void){
+  post(kullanici: DTOKullanici, successCallBack?: () => void){
   this.httpClientService.post({
     controller:"Kullanici",
   },kullanici).subscribe(result=>{ successCallBack()});}
