@@ -13,6 +13,9 @@ import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { GorevHttpClientService } from '../../services/customHttoClient/gorev-http-client-service';
 import { DTOGorev } from '../../DTOs/DTOGorev';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { guncelGorevSayisi } from '../../store/toplamGorevActions';
 declare var alertify:any;
 
 @Component({
@@ -23,27 +26,28 @@ declare var alertify:any;
 })
 
 export class GorevListesi {
-private datas=[];
-faRightFromBracket = faRightFromBracket;
+  faRightFromBracket = faRightFromBracket;
   displayedColumns: string[] = ['tik','baslik', 'basTarih', 'bitTarih', 'konu', 'durum'];
   silinecekDegerler: any[] = [];
   dataSource = null;
   clickedRows = new Set<DTOGorev>();
   gorevHttpCLient:GorevHttpClientService=inject(GorevHttpClientService)
   dialog = inject(MatDialog);
-  constructor(private router: Router){
+  count$: Observable<number>;
 
+
+  constructor(private router: Router, private store: Store<{ toplamGorev: number }>){
+    this.count$ = store.select('toplamGorev');
   }
   
   ngOnInit() {
       this.get();
-    }
+  }
 
   EkleEkraniAc() {
    const dialogRef = this.dialog.open(GorevEkle);
 
    dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
         this.get();
       });
   }
@@ -54,7 +58,6 @@ faRightFromBracket = faRightFromBracket;
     });
 
     dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
         this.get();
       });
   }
@@ -79,6 +82,8 @@ faRightFromBracket = faRightFromBracket;
   async get(){
       const gorevler:{gorevler:DTOGorev[];} = await this.gorevHttpCLient.get();
       this.dataSource=gorevler;
+      debugger
+      this.store.dispatch(guncelGorevSayisi({ data: this.dataSource.length }));
     }
 
   checkboxDegisti(element: any, event: any): void {
@@ -87,8 +92,12 @@ faRightFromBracket = faRightFromBracket;
     } else {
       this.silinecekDegerler = this.silinecekDegerler.filter(item => item !== element.id);
     }
-    console.log(this.silinecekDegerler);
   }
+
+  // guncelGorevSayisi(toplamGorev:number) {
+  //   debugger
+  //   this.store.dispatch(guncelGorevSayisi({ data: toplamGorev }));
+  // }
 
 
 }

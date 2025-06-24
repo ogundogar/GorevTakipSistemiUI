@@ -3,6 +3,8 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { JwtModule } from "@auth0/angular-jwt";
+import { toplamGorevReducer } from './store/toplamGorevReducer';
+import { provideStore } from '@ngrx/store';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,6 +20,6 @@ export const appConfig: ApplicationConfig = {
                 },
             }),
         ),
-    
+    provideStore({ count: toplamGorevReducer })
   ]
 };

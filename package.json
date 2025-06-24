@@ -22,6 +22,7 @@
     "@auth0/angular-jwt": "^5.2.0",
     "@fortawesome/angular-fontawesome": "^2.0.1",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@ngrx/store": "^19.2.1",
     "alertifyjs": "^1.14.0",
     "bootstrap": "^5.3.6",
     "ngx-toastr": "^19.0.0",
