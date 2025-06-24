@@ -1,7 +1,7 @@
 # GorevTakipSistemiUI
 
 
-##Angular CLI Kurulumu
+## Angular CLI Kurulumu
 Eğer bilgisayarda Angular CLI (Angular komut satırı aracı) yüklü değilse, global olarak yüklemek için:
 ```bash
 npm install -g @angular/cli
