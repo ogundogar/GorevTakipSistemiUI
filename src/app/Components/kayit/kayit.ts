@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-
 import { Router } from '@angular/router';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
@@ -10,6 +9,7 @@ import { MatDialogContent } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { KullaniciHttpClientService } from '../../services/customHttoClient/kullanici-http-client-service';
 import { DTOKullanici } from '../../DTOs/DTOKullanici';
+declare var alertify:any;
 
 @Component({
   selector: 'app-kayit',
@@ -44,7 +44,11 @@ export class Kayit {
         sifre: this.frm.value.sifre,
         sifreTekrar:this.frm.value.sifreTekrar
       }
-      this.kullaniciHttpClient.post(kullanici);
+      this.kullaniciHttpClient.post(kullanici,() => {
+           alertify.set('notifier','position', 'top-center');
+           alertify.success('Kayıt işlemi başarılı bir şekilde gerçekleştir'); 
+           this.router.navigate(['/giris']);
+      });
    }
 
 
