@@ -47,8 +47,8 @@ export class GorevListesi {
   EkleEkraniAc() {
    const dialogRef = this.dialog.open(GorevEkle);
 
-   dialogRef.afterClosed().subscribe(result => {
-        this.get();
+   dialogRef.afterClosed().subscribe(async result => {
+       await this.get();
       });
   }
 
@@ -57,16 +57,17 @@ export class GorevListesi {
     data: guncellenecekGorev
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-        this.get();
+    dialogRef.afterClosed().subscribe(async result => {
+       await this.get();
       });
   }
 
   gorevSil() {
      alertify.confirm('Silme', 'Görevleri Silmek İstediğinize Emin Misiniz?', 
-      ()=>{ 
+      async ()=>{ 
         this.gorevHttpCLient.removeRange(this.silinecekDegerler);
-        this.get();
+        debugger
+        await this.get();
        },()=>{ });
   }
 
