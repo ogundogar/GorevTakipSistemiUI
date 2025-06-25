@@ -20,6 +20,6 @@ export const appConfig: ApplicationConfig = {
                 },
             }),
         ),
-    provideStore({ count: toplamGorevReducer })
+    provideStore({ data: toplamGorevReducer })
   ]
 };

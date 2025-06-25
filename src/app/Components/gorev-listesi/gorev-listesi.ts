@@ -36,8 +36,8 @@ export class GorevListesi {
   count$: Observable<number>;
 
 
-  constructor(private router: Router, private store: Store<{ toplamGorev: number }>){
-    this.count$ = store.select('toplamGorev');
+  constructor(private router: Router, private store: Store<{ data: number }>){
+    this.count$ = store.select('data');
   }
   
   ngOnInit() {
@@ -82,7 +82,6 @@ export class GorevListesi {
   async get(){
       const gorevler:{gorevler:DTOGorev[];} = await this.gorevHttpCLient.get();
       this.dataSource=gorevler;
-      debugger
       this.store.dispatch(guncelGorevSayisi({ data: this.dataSource.length }));
     }
 
@@ -93,11 +92,4 @@ export class GorevListesi {
       this.silinecekDegerler = this.silinecekDegerler.filter(item => item !== element.id);
     }
   }
-
-  // guncelGorevSayisi(toplamGorev:number) {
-  //   debugger
-  //   this.store.dispatch(guncelGorevSayisi({ data: toplamGorev }));
-  // }
-
-
 }
